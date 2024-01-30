@@ -3,6 +3,7 @@ module palworld-chan
 go 1.21
 
 require (
+	github.com/duke-git/lancet/v2 v2.2.8
 	github.com/go-ini/ini v1.67.0
 	github.com/go-playground/validator/v10 v10.8.0
 	github.com/gofiber/contrib/jwt v1.0.8

@@ -53,11 +53,11 @@ func UpdateServerSetting(c *fiber.Ctx) error { //发送服务器广播
 		Type:    "success",
 	}
 
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 }
 
 func GetServerSetting(c *fiber.Ctx) error { //发送服务器广播
-	//解析成功后 转换到持久层
+	//从持久层解析到结构体
 	serverSettingJson, err := dao.Get(consts.BUCKET, "serverSetting")
 
 	if err != nil {
@@ -80,5 +80,5 @@ func GetServerSetting(c *fiber.Ctx) error { //发送服务器广播
 		Type:    "success",
 	}
 
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 }

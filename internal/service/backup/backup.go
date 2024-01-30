@@ -1,6 +1,7 @@
 package backup
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"palworld-chan/pkg/logger"
@@ -20,7 +21,7 @@ func New(name string, token string, nodeID string) BackupService {
 	}
 }
 
-func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) {
+func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) (err error) {
 	//sourceDir := "/path/to/source/directory" // 源目录
 	//destinationDir := "/path/to/backup"      // 备份文件位置 不带文件名
 
@@ -28,14 +29,17 @@ func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) {
 	backupFileName := "pal_" // 备份文件名前缀
 
 	// 检测源目录是否存在
-	if _, err := os.Stat(sourceDir); os.IsNotExist(err) {
-		logger.Fatal("Error: Source directory does not exist.")
+	_, err = os.Stat(sourceDir)
+	if os.IsNotExist(err) {
+		err = errors.New("Error: Source directory does not exist.")
 		return
 	}
 
+	_, err = os.Stat(destinationDir)
+
 	// 检测目标目录是否存在
-	if _, err := os.Stat(destinationDir); os.IsNotExist(err) {
-		logger.Fatal("Error: Destination directory does not exist.")
+	if os.IsNotExist(err) {
+		err = errors.New("Error: Destination directory does not exist.")
 		return
 	}
 
@@ -44,9 +48,9 @@ func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) {
 
 	logger.Info("Backup file now in %s", destinationFilePath)
 
-	err := ZipDirectory(sourceDir, destinationFilePath)
+	err = ZipDirectory(sourceDir, destinationFilePath)
 	if err != nil {
-		logger.Error("Error:%v", err)
+		err = errors.New(fmt.Sprintf("Error:%v", err))
 		return
 	}
 
@@ -54,4 +58,5 @@ func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) {
 
 	// 删除多余的历史备份文件
 	cleanupOldBackups(destinationDir, backupFileName, maxBackupCount)
+	return
 }

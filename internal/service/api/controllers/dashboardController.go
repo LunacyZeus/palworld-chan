@@ -106,7 +106,7 @@ func SendBroadCast(c *fiber.Ctx) error { //发送服务器广播
 		Type:    "success",
 	}
 
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 }
 
 func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
@@ -141,7 +141,7 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 		Message: "ok",
 		Type:    "success",
 	}
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 
 }
 
@@ -182,6 +182,6 @@ func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
 		Message: "ok",
 		Type:    "success",
 	}
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 
 }
