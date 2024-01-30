@@ -53,4 +53,5 @@ func Setup(app *fiber.App) {
 
 	app.Post("/api/BroadCast/send", controllers.SendBroadCast)
 	app.Get("/api/Players/show", controllers.ShowPlayers)
+	app.Get("/api/rcon/info", controllers.RconInfo)
 }

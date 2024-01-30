@@ -131,3 +131,39 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 	return c.JSON(res)
 
 }
+
+func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
+	endpoint := "127.0.0.1:25575"
+	password := "test1234"
+
+	rconClient, err := rcon.New(endpoint, password)
+	if err != nil {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("连接到rcon失败: %v", err),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
+	result, err := rconClient.Info()
+	if err != nil {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("显示在线用户失败: %v", err),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
+	res := models.Response{
+		Code:    200,
+		Result:  result,
+		Message: "ok",
+		Type:    "success",
+	}
+	return c.JSON(res)
+
+}
