@@ -1,0 +1,7 @@
+2024-01-29T23:24:51.630+0800	INFO	api/api.go:23	{0x103518860}
+2024-01-31T00:58:47.884+0800	INFO	rcon/client.go:156	result->Broadcasted: hello
+
+2024-01-31T00:58:52.972+0800	INFO	rcon/client.go:156	result->Broadcasted: hello
+
+2024-01-31T02:58:06.309+0800	INFO	rcon/client.go:170	result->Broadcasted: 123222111
+

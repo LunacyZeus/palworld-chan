@@ -1,0 +1,96 @@
+2024-01-25T18:54:18.820+0800	INFO	rcon/client.go:128	Welcome to Pal Server[v0.1.2.0] zixing-docker-generated-7343
+
+2024-01-25T18:54:26.405+0800	INFO	rcon/client.go:128	Welcome to Pal Server[v0.1.2.0] zixing-docker-generated-7343
+
+2024-01-25T18:54:48.574+0800	INFO	rcon/client.go:128	Welcome to Pal Server[v0.1.2.0] zixing-docker-generated-7343
+
+2024-01-25T18:57:57.432+0800	INFO	rcon/client.go:128	result->Complete Save
+
+2024-01-25T18:58:08.792+0800	INFO	rcon/client.go:128	result->Welcome to Pal Server[v0.1.2.0] zixing-docker-generated-7343
+
+2024-01-25T19:06:26.235+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.2.0] zixing-docker-generated-7343
+
+2024-01-25T19:14:05.045+0800	INFO	rcon/client.go:133	result->Broadcasted: test
+
+2024-01-25T19:14:16.380+0800	INFO	rcon/client.go:133	result->Broadcasted: testserverbroadcast
+
+2024-01-25T19:15:40.396+0800	INFO	rcon/client.go:133	result->Broadcasted: tests
+
+2024-01-25T19:15:53.414+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T19:16:58.457+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T19:26:09.063+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T20:17:34.472+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T20:18:12.911+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-26979
+
+2024-01-25T20:18:12.956+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T20:19:00.568+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-26979
+
+2024-01-25T20:19:00.623+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T20:19:27.115+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-26979
+
+2024-01-25T20:19:27.175+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-25T20:19:36.917+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-26979
+
+2024-01-25T20:19:36.978+0800	INFO	rcon/client.go:133	result->Broadcasted: tests,aa,aa,,aa,,aa
+
+2024-01-26T00:25:56.675+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-2058
+
+2024-01-26T00:25:56.752+0800	INFO	rcon/client.go:133	result->Broadcasted: zixing,biaoGe
+
+2024-01-26T00:53:57.454+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-2058
+
+2024-01-26T00:53:57.528+0800	INFO	rcon/client.go:133	result->Broadcasted: zixing,test
+
+2024-01-26T01:16:35.819+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-2058
+
+2024-01-26T05:20:32.078+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-2058
+
+2024-01-26T05:20:32.133+0800	INFO	rcon/client.go:133	result->Broadcasted: zixing,666
+
+2024-01-26T05:20:32.187+0800	INFO	rcon/client.go:133	result->name,playeruid,steamid
+
+2024-01-26T11:12:52.768+0800	INFO	rcon/client.go:133	result->Broadcasted: now
+
+2024-01-26T11:12:52.843+0800	INFO	rcon/client.go:133	result->Broadcasted: need
+
+2024-01-26T11:12:52.890+0800	INFO	rcon/client.go:133	result->Complete Save
+
+2024-01-26T11:12:52.937+0800	INFO	rcon/client.go:133	result->The server will shut down in 60 seconds. Please prepare to exit the game.
+
+2024-01-28T21:51:12.577+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-1504
+
+2024-01-28T21:51:12.678+0800	INFO	rcon/client.go:133	result->Broadcasted: msg,broadcat
+
+2024-01-30T13:01:16.904+0800	INFO	rcon/client.go:133	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-30T13:15:19.529+0800	INFO	rcon/client.go:155	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-30T13:16:18.046+0800	INFO	rcon/client.go:155	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-30T13:18:56.995+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-30T13:37:42.375+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-31T00:04:00.805+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] zixing-docker-generated-18983
+
+2024-01-31T00:18:17.701+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] Default Palworld Server
+
+2024-01-31T00:35:35.217+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] Default Palworld Server
+
+2024-01-31T00:35:35.234+0800	INFO	rcon/client.go:156	result->Broadcasted: msg,reboot,in,60,s
+
+2024-01-31T02:05:50.050+0800	INFO	rcon/client.go:156	result->Welcome to Pal Server[v0.1.3.0] Default Palworld Server
+
+2024-01-31T02:05:50.066+0800	INFO	rcon/client.go:156	result->Broadcasted: msg,reboot,in,60,s
+
+2024-01-31T02:22:57.648+0800	INFO	rcon/client.go:170	result->Welcome to Pal Server[v0.1.3.0] Default Palworld Server
+
+2024-01-31T02:22:57.664+0800	INFO	rcon/client.go:170	result->Broadcasted: msg,reboot,in,60,s
+
