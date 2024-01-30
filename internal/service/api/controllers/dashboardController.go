@@ -3,23 +3,36 @@ package controllers
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/api/pkg/resp"
+	"palworld-chan/internal/service/dao"
 	"palworld-chan/internal/service/dashboard"
 	"palworld-chan/pkg/utility/rcon"
+	"palworld-chan/pkg/utility/utils"
 	"strings"
 )
 
 func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	processName := "PalServer-Win64-Test-Cmd.exe"
 
+	ServerName, err := dao.Get(consts.BUCKET, "ServerName")
+	if err != nil {
+		ServerName = ""
+	}
+
+	ServerVersion, err := dao.Get(consts.BUCKET, "ServerVersion")
+	if err != nil {
+		ServerVersion = ""
+	}
+
 	// 获取进程信息
 	cpuUsage, memoryUsage, upTime := dashboard.GetProcessInfo(processName)
 
 	result := models.GameServerInfoStruct{
 		ProcessName:   processName,
-		ServerName:    "-",
-		ServerVersion: "-",
+		ServerName:    ServerName,
+		ServerVersion: ServerVersion,
 		MemoryUsage:   memoryUsage,
 		CpuUsage:      cpuUsage,
 		UpTime:        upTime,
@@ -93,7 +106,7 @@ func SendBroadCast(c *fiber.Ctx) error { //发送服务器广播
 		Type:    "success",
 	}
 
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
 }
 
 func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
@@ -128,5 +141,47 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 		Message: "ok",
 		Type:    "success",
 	}
-	return c.JSON(res)
+	return c.Status(fiber.StatusOK).JSON(res)
+
+}
+
+func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
+	endpoint := "127.0.0.1:25575"
+	password := "test1234"
+
+	rconClient, err := rcon.New(endpoint, password)
+	if err != nil {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("连接到rcon失败: %v", err),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
+	result, err := rconClient.Info()
+	if err != nil {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("显示在线用户失败: %v", err),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
+	version, name := utils.ParseServerInfo(result)
+
+	_ = dao.Set(consts.BUCKET, "ServerName", version)
+	_ = dao.Set(consts.BUCKET, "ServerVersion", name)
+
+	res := models.Response{
+		Code:    200,
+		Result:  fiber.Map{"version": version, "name": name},
+		Message: "ok",
+		Type:    "success",
+	}
+	return c.Status(fiber.StatusOK).JSON(res)
+
 }

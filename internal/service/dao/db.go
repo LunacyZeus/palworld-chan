@@ -5,7 +5,7 @@ import (
 	"palworld-chan/pkg/utility/db"
 )
 
-func Create(bucket, key, value string) (err error) {
+func Set(bucket, key, value string) (err error) {
 	err = db.Db().Update(
 		func(tx *nutsdb.Tx) error {
 			bKey := []byte(key)

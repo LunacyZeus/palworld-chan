@@ -10,7 +10,7 @@ func Test_db_crud(t *testing.T) {
 	bucket := consts.BUCKET
 	key := "k"
 	value := "v"
-	err := dao.Create(bucket, key, value)
+	err := dao.Set(bucket, key, value)
 	if err != nil {
 		t.Fatal(err)
 	}

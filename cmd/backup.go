@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"palworld-chan/internal/service/backup"
+	"palworld-chan/pkg/logger"
 )
 
 var backupCmd = &cobra.Command{
@@ -23,7 +24,10 @@ var backupCmd = &cobra.Command{
 		dest := viper.GetString("dest")
 		backupCount := viper.GetInt("backupCount")
 
-		backup.LocalBackUp(source, dest, backupCount)
+		err := backup.LocalBackUp(source, dest, backupCount)
+		if err != nil {
+			logger.Fatal("%v", err)
+		}
 
 		return nil
 	},

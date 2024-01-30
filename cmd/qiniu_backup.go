@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"palworld-chan/internal/service/backup"
+	"palworld-chan/pkg/logger"
 )
 
 var qiNiuBackupCmd = &cobra.Command{
@@ -23,7 +24,10 @@ var qiNiuBackupCmd = &cobra.Command{
 		secretKey := viper.GetString("secretKey")
 		bucket := viper.GetString("bucket")
 
-		backup.QiNiuBackUp(source, dest, accessKey, secretKey, bucket)
+		err := backup.QiNiuBackUp(source, dest, accessKey, secretKey, bucket)
+		if err != nil {
+			logger.Fatal("%v", err)
+		}
 
 		return nil
 	},

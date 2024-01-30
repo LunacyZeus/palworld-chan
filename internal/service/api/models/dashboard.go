@@ -31,3 +31,21 @@ type OnlinePlayer struct {
 	PlayerUid string `json:"playeruid"`
 	SteamId   string `json:"steamid"`
 }
+
+type UpdateServerSettingInput struct {
+	ProcessName     string `json:"processName" validate:"required"`
+	ExecutablePath  string `json:"executablePath" validate:"required"`
+	MemoryThreshold string `json:"memoryThreshold" validate:"gte=1,lte=99"`
+	CheckPeriod     string `json:"checkPeriod" validate:"required,number"`
+	RestartDelay    string `json:"restartDelay" validate:"required,number"`
+	RconAddress     string `json:"rconAddress"`
+	RconPort        string `json:"rconPort"`
+	RconPasswd      string `json:"rconPasswd"`
+	SourceDir       string `json:"sourceDir" validate:"required"`
+	DestDir         string `json:"destDir" validate:"required"`
+	BackupTime      string `json:"backupTime" validate:"required,number"`
+	BackupCount     string `json:"backupCount" validate:"required,number"`
+	AccessToken     string `json:"accessToken"`
+	SecretKey       string `json:"secretKey"`
+	Bucket          string `json:"bucket"`
+}

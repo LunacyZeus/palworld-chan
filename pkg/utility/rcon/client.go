@@ -100,7 +100,7 @@ func (c *Client) TeleportToMe(steamId string) error {
 
 // ShowPlayers Show information on all connected players.
 func (c *Client) ShowPlayers() ([]models.OnlinePlayer, error) {
-	response, err := c.execute("ShowPlayers")
+	response, err := c.execute(ShowPlayers)
 	if err != nil {
 		return nil, err
 	}
@@ -146,8 +146,14 @@ func (c *Client) ShowPlayers() ([]models.OnlinePlayer, error) {
 }
 
 // Info Show server information.
-func (c *Client) Info() error {
-	return c.exec(Info)
+func (c *Client) Info() (response string, err error) {
+	response, err = c.execute(Info)
+	if err != nil {
+		return "", err
+	}
+	defer c.Close()
+
+	return
 }
 
 // Save Save the world data.
@@ -171,8 +177,9 @@ func (c *Client) exec(cmd CmdName, args ...string) error {
 	return nil
 }
 
-func (c *Client) execute(command string) (string, error) {
-	response, err := c.conn.Execute(command)
+func (c *Client) execute(cmd CmdName) (string, error) {
+	cmdStr := string(cmd)
+	response, err := c.conn.Execute(cmdStr)
 	response = strings.TrimSpace(response)
 	if err != nil && c.skipErrors && response != "" {
 		return response, nil
