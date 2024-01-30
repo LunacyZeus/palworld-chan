@@ -3,23 +3,36 @@ package controllers
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/api/pkg/resp"
+	"palworld-chan/internal/service/dao"
 	"palworld-chan/internal/service/dashboard"
 	"palworld-chan/pkg/utility/rcon"
+	"palworld-chan/pkg/utility/utils"
 	"strings"
 )
 
 func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	processName := "PalServer-Win64-Test-Cmd.exe"
 
+	ServerName, err := dao.Get(consts.BUCKET, "ServerName")
+	if err != nil {
+		ServerName = ""
+	}
+
+	ServerVersion, err := dao.Get(consts.BUCKET, "ServerVersion")
+	if err != nil {
+		ServerVersion = ""
+	}
+
 	// 获取进程信息
 	cpuUsage, memoryUsage, upTime := dashboard.GetProcessInfo(processName)
 
 	result := models.GameServerInfoStruct{
 		ProcessName:   processName,
-		ServerName:    "-",
-		ServerVersion: "-",
+		ServerName:    ServerName,
+		ServerVersion: ServerVersion,
 		MemoryUsage:   memoryUsage,
 		CpuUsage:      cpuUsage,
 		UpTime:        upTime,
@@ -158,9 +171,14 @@ func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
 		return c.JSON(res)
 	}
 
+	version, name := utils.ParseServerInfo(result)
+
+	_ = dao.Set(consts.BUCKET, "ServerName", version)
+	_ = dao.Set(consts.BUCKET, "ServerVersion", name)
+
 	res := models.Response{
 		Code:    200,
-		Result:  result,
+		Result:  fiber.Map{"version": version, "name": name},
 		Message: "ok",
 		Type:    "success",
 	}
