@@ -12,16 +12,38 @@ func ServerSetting() (updateServerSetting *models.UpdateServerSettingInput, err 
 	serverSettingJson, err := Get(consts.BUCKET, "serverSetting")
 
 	if err != nil {
-		return
-	}
+		//serverSetting 不存在 新建默认
+		updateServerSetting = &models.UpdateServerSettingInput{
+			ProcessName:     "PalServer-Win64-Test-Cmd.exe",
+			ExecutablePath:  "F:/pal/steamapps/common/PalServer/PalServer.exe",
+			MemoryThreshold: "90",
+			CheckPeriod:     "20",
+			RestartDelay:    "60",
+			RconAddress:     "",
+			RconPort:        "",
+			RconPasswd:      "",
+			SourceDir:       "",
+			DestDir:         "",
+			BackupTime:      "1800",
+			BackupCount:     "2000",
+			AccessToken:     "",
+			SecretKey:       "",
+			Bucket:          "",
+		}
+		//保存到持久层
+		// 转换为 JSON 字符串
+		serverSettingJson, err = utils.ToJSONString(updateServerSetting)
+		if err != nil {
+			return
+		}
+		_ = Set(consts.BUCKET, "serverSetting", serverSettingJson)
 
-	// 创建 UpdateServerSettingInput 实例
-	//var updateServerSetting models.UpdateServerSettingInput
-
-	// 解析 JSON 字符串到结构体
-	err = utils.FromJSONString(serverSettingJson, &updateServerSetting)
-	if err != nil {
-		return
+	} else {
+		// 解析 JSON 字符串到结构体
+		err = utils.FromJSONString(serverSettingJson, &updateServerSetting)
+		if err != nil {
+			return
+		}
 	}
 
 	return
