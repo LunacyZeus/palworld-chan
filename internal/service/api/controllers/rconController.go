@@ -20,7 +20,7 @@ func SendBroadCast(c *fiber.Ctx) error { //发送服务器广播
 
 	message := strings.ReplaceAll(broadCast.BroadCast, " ", "_")
 
-	RconAddress, RconPort, RconPasswd, err := dao.GetRconInfo()
+	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
 	if err != nil {
 		return err
 	}
@@ -61,7 +61,7 @@ func SendBroadCast(c *fiber.Ctx) error { //发送服务器广播
 }
 
 func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
-	RconAddress, RconPort, RconPasswd, err := dao.GetRconInfo()
+	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 }
 
 func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
-	RconAddress, RconPort, RconPasswd, err := dao.GetRconInfo()
+	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
 	if err != nil {
 		return err
 	}
@@ -151,7 +151,7 @@ func RestartServer(c *fiber.Ctx) error { //显示在线用户
 	seconds := c.Query("seconds", "30")
 	message := c.Query("message", "Server_will_reboot_in_30_s")
 
-	RconAddress, RconPort, RconPasswd, err := dao.GetRconInfo()
+	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
 	if err != nil {
 		return err
 	}
