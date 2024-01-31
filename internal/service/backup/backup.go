@@ -54,7 +54,7 @@ func LocalBackUp(sourceDir, destinationDir string, maxBackupCount int) (err erro
 		return
 	}
 
-	logger.Info("Backup successful!")
+	//logger.Info("Backup successful!")
 
 	// 删除多余的历史备份文件
 	cleanupOldBackups(destinationDir, backupFileName, maxBackupCount)
