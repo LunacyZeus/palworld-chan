@@ -3,7 +3,7 @@
 
 **基本功能**
 
-*   优雅重启（内存占用达到阈值后自动发送公告并关服等待重启）  
+*   优雅重启（内存占用达到阈值后自动发送公告并关服等待重启）
 *   自动备份存档（本地自动备份存档/七牛云端备份）
 *   存档备份管理（无需ssh，可直接在线下载对应存档）
 *   在线可视化编辑服务器配置文档(.ini)
@@ -16,17 +16,30 @@
 *   Rcon指令（获取服务器信息、实时玩家列表、踢出/封禁玩家、服务器广播、平滑关闭服务器并广播）
 *   RCON 命令官方文档地址（<https://tech.palworldgame.com/server-commands）>
 
+**注意!!!**
+
+有问题可以提交issues给我,不怎么会用github这边的action,还在摸索中,今晚应该可以把自动发releases肝出来 &#x20;
 
 
-**使用方法**\
-上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限  
-web ui使用办法还在写中  
+
+**使用方法  **\
+上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限\
+web ui使用办法还在写中
 
 ```bash
 chmod 755 palworld_chan_amd64_linux
 ```
 
-**本地备份**
+**启动API服务**
+
+```bash
+palworld-chan api
+#此时会自动一个端口为3000的web服务器,浏览器打开就能看到了,使用手机访问最佳
+```
+
+
+
+**\[命令行]本地备份**
 
 ```bash
 ./palworld_chan_amd64_linux backup --source /home/docker-palworld-dedicated-server/game/Pal/Saved --dest /root/backup/
@@ -36,7 +49,7 @@ chmod 755 palworld_chan_amd64_linux
 #建议配合定时任务一起使用 暂时仅支持linux
 ```
 
-**使用七牛备份**
+**\[命令行]使用七牛备份**
 
 ```bash
 ./palworld_chan_amd64_linux 7backup --source /home/docker-palworld-dedicated-server/game/Pal/Saved --dest /root/backup/  --ak accessToken --sk secretKey --bucket bucket存储空间
@@ -69,15 +82,14 @@ chmod 755 palworld_chan_amd64_linux
 
 *   程序基于go语言开发，使用了fiber作为web部分框架，数据持久层使用的nutsdb，前端部分使用vant+vue3+pinia实现，项目脚手架使用的（<https://github.com/xiangshu233/vue3-vant4-mobile>），cron定时任务使用的（github.com/robfig/cron/v3），go部分实现代码已全部开源。
 
-
-**软件截图**  
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/index.png)  
-首页  
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/tool.png)  
-工具  
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/setting.png?raw=true)  
-设置  
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/backup.png?raw=true)  
-备份页  
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/server_setting.png?raw=true)  
-服务器设定  
+**软件截图**\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/index.png)\
+首页\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/tool.png)\
+工具\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/setting.png?raw=true)\
+设置\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/backup.png?raw=true)\
+备份页\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/server_setting.png?raw=true)\
+服务器设定
