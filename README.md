@@ -20,7 +20,8 @@
 
 
 **使用方法**\
-上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限
+上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限  
+web ui使用办法还在写中
 
 ```bash
 chmod 755 palworld_chan_amd64_linux
