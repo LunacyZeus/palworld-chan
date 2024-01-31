@@ -49,3 +49,8 @@ type UpdateServerSettingInput struct {
 	SecretKey       string `json:"secretKey"`
 	Bucket          string `json:"bucket"`
 }
+
+type BackUpFile struct {
+	FileName string `json:"name"`
+	Created  string `json:"created"`
+}

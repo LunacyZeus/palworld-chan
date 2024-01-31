@@ -5,6 +5,7 @@ import (
 	"errors"
 	"os"
 	"os/exec"
+	"palworld-chan/internal/service/api/models"
 	"palworld-chan/pkg/logger"
 	"path/filepath"
 	"strings"
@@ -88,8 +89,8 @@ func CheckExist(dir string) bool {
 	return true
 }
 
-func GetFilesAndCreationDates(folderPath string) (map[string]string, error) {
-	filesAndCreationDates := make(map[string]string)
+func GetBackUpFiles(folderPath string) ([]models.BackUpFile, error) {
+	fileList := []models.BackUpFile{}
 
 	err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -103,7 +104,12 @@ func GetFilesAndCreationDates(folderPath string) (map[string]string, error) {
 				return err
 			}
 			// 添加到映射中
-			filesAndCreationDates[path] = creationDate
+			//filesAndCreationDates[path] = creationDate
+			elem := models.BackUpFile{
+				FileName: info.Name(),
+				Created:  creationDate,
+			}
+			fileList = append(fileList, elem)
 		}
 		return nil
 	})
@@ -112,7 +118,7 @@ func GetFilesAndCreationDates(folderPath string) (map[string]string, error) {
 		return nil, err
 	}
 
-	return filesAndCreationDates, nil
+	return fileList, nil
 }
 
 func getFileCreationDate(filePath string) (string, error) {

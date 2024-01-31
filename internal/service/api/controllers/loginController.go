@@ -4,21 +4,11 @@ import (
 	_ "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
+	"palworld-chan/internal/service/api/config"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/api/pkg/resp"
 	"time"
 )
-
-func checkLogin(validUserName, validPassWord string) bool {
-	userName := "hoho"
-	passWord := "123"
-
-	// 检查用户名和密码
-	if userName == validUserName && passWord == validPassWord {
-		return true
-	}
-	return false
-}
 
 func Login(c *fiber.Ctx) error { //服务器状态 获取
 	// 解析 JSON 数据到结构体
@@ -29,7 +19,7 @@ func Login(c *fiber.Ctx) error { //服务器状态 获取
 
 	// 处理用户数据
 	// 你可以在这里进行登录验证等操作
-	if !checkLogin(user.Username, user.Password) {
+	if !config.Auth().Check(user.Username, user.Password) {
 		//{"code":300,"result":null,"message":"帐号或密码不正确","type":"error"}
 		res := models.Response{
 			Code:    300,
