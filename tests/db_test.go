@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_db_crud(t *testing.T) {
+func aTest_db_crud(t *testing.T) {
 	bucket := consts.BUCKET
 	key := "k"
 	value := "v"

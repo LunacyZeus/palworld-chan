@@ -10,7 +10,14 @@ import (
 )
 
 func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
-	processName := "PalServer-Win64-Test-Cmd.exe"
+	serverSetting, err := dao.ServerSetting()
+	if err != nil {
+		return err
+	}
+	processName := serverSetting.ProcessName
+	if serverSetting.ProcessName == "" {
+		processName = "PalServer-Win64-Test-Cmd.exe"
+	}
 
 	ServerName, err := dao.Get(consts.BUCKET, "ServerName")
 	if err != nil {

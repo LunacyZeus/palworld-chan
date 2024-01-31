@@ -40,7 +40,7 @@ func UpdateServerSetting(c *fiber.Ctx) error { //发送服务器广播
 	SourceDir := updateServerSettingInput.SourceDir
 	DestDir := updateServerSettingInput.DestDir
 
-	if utils.CheckExist(SourceDir) {
+	if !utils.CheckExist(SourceDir) {
 		res := models.Response{
 			Code:    300,
 			Result:  nil,
@@ -50,7 +50,7 @@ func UpdateServerSetting(c *fiber.Ctx) error { //发送服务器广播
 		return c.JSON(res)
 	}
 
-	if utils.CheckExist(DestDir) {
+	if !utils.CheckExist(DestDir) {
 		res := models.Response{
 			Code:    300,
 			Result:  nil,
