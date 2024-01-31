@@ -64,37 +64,37 @@ func (c *Client) HandleMemoryUsage(threshold float64) {
 }
 
 // Shutdown The server is shut down after the number of Seconds Will be notified of your MessageText.
-func (c *Client) Shutdown(seconds, message string) error {
+func (c *Client) Shutdown(seconds, message string) (string, error) {
 	return c.exec(Shutdown, seconds, message)
 }
 
 // DoExit Force stop the server.
-func (c *Client) DoExit() error {
+func (c *Client) DoExit() (string, error) {
 	return c.exec(DoExit)
 }
 
 // Broadcast Send message to all player in the server.
-func (c *Client) Broadcast(message string) error {
+func (c *Client) Broadcast(message string) (string, error) {
 	return c.exec(Broadcast, message)
 }
 
 // KickPlayer Kick player from the server.
-func (c *Client) KickPlayer(steamId string) error {
+func (c *Client) KickPlayer(steamId string) (string, error) {
 	return c.exec(KickPlayer, steamId)
 }
 
 // BanPlayer BAN player from the server.
-func (c *Client) BanPlayer(steamId string) error {
+func (c *Client) BanPlayer(steamId string) (string, error) {
 	return c.exec(BanPlayer, steamId)
 }
 
 // TeleportToPlayer Teleport to current location of target player.
-func (c *Client) TeleportToPlayer(steamId string) error {
+func (c *Client) TeleportToPlayer(steamId string) (string, error) {
 	return c.exec(TeleportToPlayer, steamId)
 }
 
 // TeleportToMe Target player teleport to your current location
-func (c *Client) TeleportToMe(steamId string) error {
+func (c *Client) TeleportToMe(steamId string) (string, error) {
 	return c.exec(TeleportToMe, steamId)
 }
 
@@ -157,24 +157,24 @@ func (c *Client) Info() (response string, err error) {
 }
 
 // Save Save the world data.
-func (c *Client) Save() error {
+func (c *Client) Save() (string, error) {
 	return c.exec(Save)
 }
 
-func (c *Client) exec(cmd CmdName, args ...string) error {
+func (c *Client) exec(cmd CmdName, args ...string) (result string, err error) {
 	argStr := strings.Join(args, " ")
 	cmdStr := string(cmd)
 	if argStr != "" {
 		cmdStr = fmt.Sprintf("%s %s", cmd, argStr)
 	}
 
-	result, err := c.conn.Execute(cmdStr)
+	result, err = c.conn.Execute(cmdStr)
 	if err != nil {
 		log.Printf("execute [%s] error [%v]\n", cmdStr, err)
-		return err
+		return
 	}
 	logger.Info("result->%s", result)
-	return nil
+	return
 }
 
 func (c *Client) execute(cmd CmdName) (string, error) {
