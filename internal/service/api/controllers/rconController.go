@@ -3,11 +3,9 @@ package controllers
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
-	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/dao"
 	"palworld-chan/pkg/utility/rcon"
-	"palworld-chan/pkg/utility/utils"
 	"strings"
 )
 
@@ -102,44 +100,14 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 }
 
 func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
-	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
+	serverVersion, serverName, err := dao.GetServerInfo()
 	if err != nil {
 		return err
 	}
 
-	endpoint := fmt.Sprintf("%s:%s", RconAddress, RconPort)
-	password := RconPasswd
-
-	rconClient, err := rcon.New(endpoint, password)
-	if err != nil {
-		res := models.Response{
-			Code:    300,
-			Result:  nil,
-			Message: fmt.Sprintf("连接到rcon失败: %v", err),
-			Type:    "error",
-		}
-		return c.JSON(res)
-	}
-
-	result, err := rconClient.Info()
-	if err != nil {
-		res := models.Response{
-			Code:    300,
-			Result:  nil,
-			Message: fmt.Sprintf("显示在线用户失败: %v", err),
-			Type:    "error",
-		}
-		return c.JSON(res)
-	}
-
-	version, name := utils.ParseServerInfo(result)
-
-	_ = dao.Set(consts.BUCKET, "ServerName", version)
-	_ = dao.Set(consts.BUCKET, "ServerVersion", name)
-
 	res := models.Response{
 		Code:    200,
-		Result:  fiber.Map{"version": version, "name": name},
+		Result:  fiber.Map{"version": serverVersion, "name": serverName},
 		Message: "ok",
 		Type:    "success",
 	}

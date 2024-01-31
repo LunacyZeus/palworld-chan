@@ -33,8 +33,9 @@ chmod 755 palworld_chan_amd64_linux
 **启动API服务**
 
 ```bash
-palworld-chan api
-#此时会自动一个端口为3000的web服务器,浏览器打开就能看到了,使用手机访问最佳
+palworld-chan api --port=:3001 --authUser=pal --authPassWd=1234
+#此时会自动一个端口为3001的web服务器,账号为pal 密码为1234,浏览器打开就能看到了,使用手机访问最佳
+#windows启动也是一样的你需要在命令行输入palworld_chan.exe --port=:3001 --authUser=pal --authPassWd=1234
 ```
 
 

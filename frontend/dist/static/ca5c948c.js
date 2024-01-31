@@ -1,0 +1,1 @@
+import{ax as e}from"./0cbe59eb.js";function s(){return e.request({url:"/GameServer/get",method:"GET"},{isTransformResponse:!1})}function t(){return e.request({url:"/ServerInfo/get",method:"GET"},{isTransformResponse:!1})}function n(){return e.request({url:"/backUpList/get",method:"GET"},{isTransformResponse:!1})}export{t as a,n as b,s as g};

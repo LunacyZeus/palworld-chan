@@ -1,1 +1,1 @@
-@palworld_chan.exe api
+@palworld_chan.exe --port=:3001 --authUser=pal --authPassWd=1234

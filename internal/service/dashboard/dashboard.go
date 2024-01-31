@@ -157,7 +157,7 @@ func GetProcessInfo(processName string) (cpuUsage, memoryUsage, upTime string) {
 	// 获取进程创建时间
 	createTime, err := proc.CreateTime()
 	if err != nil {
-		upTime = "-"
+		upTime = "未运行"
 	} else {
 		log.Println(createTime)
 		upTimeNum := time.Since(time.Unix(int64(createTime/1000), 0))

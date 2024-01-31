@@ -57,4 +57,6 @@ func Setup(app *fiber.App) {
 	app.Get("/api/rcon/restart", controllers.RestartServer)
 	app.Post("/api/serverSetting/update", controllers.UpdateServerSetting)
 	app.Get("/api/serverSetting/get", controllers.GetServerSetting)
+
+	app.Get("/api/backUpList/get", controllers.GetBackUpList)
 }
