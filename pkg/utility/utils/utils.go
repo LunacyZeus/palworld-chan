@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"palworld-chan/pkg/logger"
+	"path/filepath"
 	"strings"
 )
 
@@ -81,8 +82,45 @@ func CheckExist(dir string) bool {
 
 	// 检测目标目录是否存在
 	if os.IsNotExist(err) {
-		err = errors.New("Error: Destination directory does not exist.")
+		err = errors.New("Error: directory does not exist.")
 		return false
 	}
 	return true
+}
+
+func GetFilesAndCreationDates(folderPath string) (map[string]string, error) {
+	filesAndCreationDates := make(map[string]string)
+
+	err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		// 排除目录
+		if !info.IsDir() {
+			// 获取文件创建日期
+			creationDate, err := getFileCreationDate(path)
+			if err != nil {
+				return err
+			}
+			// 添加到映射中
+			filesAndCreationDates[path] = creationDate
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return filesAndCreationDates, nil
+}
+
+func getFileCreationDate(filePath string) (string, error) {
+	fileInfo, err := os.Stat(filePath)
+	if err != nil {
+		return "", err
+	}
+	// 获取文件创建日期（修改时间）
+	creationDate := fileInfo.ModTime().Format("2006-01-02 15:04:05")
+	return creationDate, nil
 }

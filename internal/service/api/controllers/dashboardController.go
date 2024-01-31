@@ -14,7 +14,7 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	if err != nil {
 		return err
 	}
-	processName := ""
+	processName := serverSetting.ProcessName
 	if serverSetting.ProcessName == "" {
 		processName = "PalServer-Win64-Test-Cmd.exe"
 	}

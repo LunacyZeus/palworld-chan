@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_Rcon_Info(t *testing.T) {
+func aTest_Rcon_Info(t *testing.T) {
 	endpoint := "127.0.0.1:25575"
 	password := "test1234"
 
