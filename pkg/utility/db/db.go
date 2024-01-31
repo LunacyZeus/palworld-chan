@@ -2,8 +2,8 @@ package db
 
 import (
 	"github.com/nutsdb/nutsdb"
-	"log"
 	"palworld-chan/internal/consts"
+	"palworld-chan/pkg/logger"
 	"sync"
 )
 
@@ -11,23 +11,29 @@ var instance *nutsdb.DB
 var once sync.Once
 
 func createBucket(db *nutsdb.DB) {
-	err := db.Update(
-		func(tx *nutsdb.Tx) error {
-			return tx.NewBucket(nutsdb.DataStructureBTree, consts.BUCKET)
-		})
-	if err != nutsdb.ErrBucketAlreadyExist {
-		log.Fatal(err)
+
+	if err := db.Update(func(tx *nutsdb.Tx) error {
+		// you should call Bucket with data structure and the name of bucket first
+		return tx.NewBucket(nutsdb.DataStructureBTree, consts.BUCKET)
+	}); err != nil {
+		if err == nutsdb.ErrBucketAlreadyExist {
+			return
+		}
+		logger.Fatal("bucket创建异常->%v", err)
+		return
 	}
+	logger.Info("创建本地bucket: %s", consts.BUCKET)
 }
 
 func Db() *nutsdb.DB {
 	once.Do(func() {
 		localDb, err := nutsdb.Open(
 			nutsdb.DefaultOptions,
-			nutsdb.WithDir("/tmp/nutsdb"), // 数据库会自动创建这个目录文件
+			nutsdb.WithDir("/tmp/pal_db"), // 数据库会自动创建这个目录文件
 		)
 		if err != nil {
-			log.Fatal(err)
+			logger.Error("打开本地持久层错误->%v", err)
+			return
 		}
 		instance = localDb
 		createBucket(instance)
