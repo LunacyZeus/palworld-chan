@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"errors"
 	"os"
 	"os/exec"
 	"palworld-chan/pkg/logger"
@@ -73,4 +74,15 @@ func FromJSONString(jsonString string, v interface{}) error {
 		return err
 	}
 	return nil
+}
+
+func CheckExist(dir string) bool {
+	_, err := os.Stat(dir)
+
+	// 检测目标目录是否存在
+	if os.IsNotExist(err) {
+		err = errors.New("Error: Destination directory does not exist.")
+		return false
+	}
+	return true
 }

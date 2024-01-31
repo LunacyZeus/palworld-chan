@@ -27,7 +27,7 @@ func ServerSetting() (updateServerSetting *models.UpdateServerSettingInput, err 
 	return
 }
 
-func GetRconInfo() (RconAddress, RconPort, RconPasswd string, err error) {
+func RconInfo() (RconAddress, RconPort, RconPasswd string, err error) {
 	serverSetting, err := ServerSetting()
 	if err != nil {
 		return

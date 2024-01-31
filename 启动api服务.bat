@@ -1,0 +1,1 @@
+@palworld_chan.exe api

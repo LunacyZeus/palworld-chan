@@ -37,6 +37,29 @@ func UpdateServerSetting(c *fiber.Ctx) error { //发送服务器广播
 		}
 	}
 
+	SourceDir := updateServerSettingInput.SourceDir
+	DestDir := updateServerSettingInput.DestDir
+
+	if utils.CheckExist(SourceDir) {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("存档目录不存在: %s", SourceDir),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
+	if utils.CheckExist(DestDir) {
+		res := models.Response{
+			Code:    300,
+			Result:  nil,
+			Message: fmt.Sprintf("备份目录不存在: %s", DestDir),
+			Type:    "error",
+		}
+		return c.JSON(res)
+	}
+
 	//解析成功后 转换到持久层
 	// 转换为 JSON 字符串
 	serverSettingJson, err := utils.ToJSONString(updateServerSettingInput)
