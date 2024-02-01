@@ -137,3 +137,8 @@ func getFileCreationDate(filePath string) (string, error) {
 	creationDate := fileInfo.ModTime().Format("2006-01-02 15:04:05")
 	return creationDate, nil
 }
+
+func FileOrDirExists(path string) bool {
+	_, err := os.Stat(path)
+	return !os.IsNotExist(err)
+}

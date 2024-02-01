@@ -10,6 +10,7 @@ import (
 	"palworld-chan/internal/service/dao"
 	"palworld-chan/internal/service/dashboard"
 	"palworld-chan/pkg/utility/utils"
+	"path/filepath"
 )
 
 func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
@@ -98,4 +99,31 @@ func GetBackUpList(c *fiber.Ctx) error { //备份文件列表 获取
 
 	res := resp.JsonResp(backUpFiles)
 	return c.Status(fiber.StatusOK).JSON(res)
+}
+
+func DownLoadBackUpFile(c *fiber.Ctx) error { //备份文件 下载
+	fileName := c.Query("fileName", "")
+	if fileName == "" {
+		err := errors.New("备份文件不能为空")
+		return err
+	}
+	// 检查后缀名是否为.zip
+	if filepath.Ext(fileName) != ".zip" {
+		err := errors.New("web安全考虑,只能下载zip格式文件")
+		return err
+	}
+
+	serverSetting, err := dao.ServerSetting()
+	if err != nil {
+		return err
+	}
+
+	// 组合路径
+	filePath := filepath.Join(serverSetting.DestDir, fileName)
+	if !utils.FileOrDirExists(filePath) {
+		err = errors.New("文件不存在")
+		return err
+	}
+
+	return c.Download("./files/report-12345.pdf")
 }
