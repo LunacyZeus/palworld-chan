@@ -13,7 +13,11 @@ func StartCron() {
 		c := cron.New()
 		// 每5秒执行一次
 		c.AddFunc("@every 5s", func() {
-			job.AutoBackUp()
+			_ = job.AutoBackUp()
+		})
+		// 每10秒执行一次 系统性能检测
+		c.AddFunc("@every 10s", func() {
+			_ = job.MonitorServer()
 		})
 		c.Start()
 	})
