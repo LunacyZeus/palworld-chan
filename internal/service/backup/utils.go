@@ -92,7 +92,7 @@ func cleanupOldBackups(destinationDir, backupFileName string, maxBackupCount int
 			if err != nil {
 				fmt.Println("Error deleting old backup:", err)
 			} else {
-				fmt.Println("Old backup deleted:", fileToDelete)
+				//fmt.Println("Old backup deleted:", fileToDelete)
 			}
 		}
 	}

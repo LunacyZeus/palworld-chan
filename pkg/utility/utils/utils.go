@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"palworld-chan/internal/service/api/models"
@@ -141,4 +142,98 @@ func getFileCreationDate(filePath string) (string, error) {
 func FileOrDirExists(path string) bool {
 	_, err := os.Stat(path)
 	return !os.IsNotExist(err)
+}
+
+func FindPalWorldSettingsIni(directoryPath string) (string, error) {
+	var palWorldSettingsPath string
+
+	err := filepath.Walk(directoryPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// 检查是否为 PalWorldSettings.ini 文件
+		if !info.IsDir() && info.Name() == "PalWorldSettings.ini" {
+			palWorldSettingsPath = path
+			return filepath.SkipDir // 停止递归，因为我们已经找到了目标文件
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return "", err
+	}
+
+	if palWorldSettingsPath == "" {
+		return "", fmt.Errorf("PalWorldSettings.ini not found in %s", directoryPath)
+	}
+
+	return palWorldSettingsPath, nil
+}
+
+func FindPlayersFolder(directoryPath string) (string, error) {
+	var playersFolderPath string
+
+	err := filepath.Walk(directoryPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// 检查是否为 Players 文件夹
+		if info.IsDir() && info.Name() == "Players" {
+			playersFolderPath = path
+			return filepath.SkipDir // 停止递归，因为我们已经找到了目标文件夹
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return "", err
+	}
+
+	if playersFolderPath == "" {
+		return "", fmt.Errorf("Players folder not found in %s", directoryPath)
+	}
+
+	return playersFolderPath, nil
+}
+
+func GetSaveFiles(folderPath string) ([]models.SaveFile, error) {
+	fileList := []models.SaveFile{}
+
+	err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		// 排除目录
+		if !info.IsDir() {
+			// 获取文件创建日期
+			creationDate, err := getFileCreationDate(path)
+			if err != nil {
+				return err
+			}
+			// 添加到映射中
+			//filesAndCreationDates[path] = creationDate
+			elem := models.SaveFile{
+				FileName: info.Name(),
+				Created:  creationDate,
+			}
+			fileList = append(fileList, elem)
+		}
+
+		// 按创建日期排序
+		sort.Slice(fileList, func(i, j int) bool {
+			return fileList[i].Created > fileList[j].Created
+		})
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return fileList, nil
 }

@@ -18,3 +18,15 @@ func Test_Dir(t *testing.T) {
 
 	fmt.Printf("%v\n", filesAndCreationDates)
 }
+
+func Test_Find_Ini_File(t *testing.T) {
+	directoryPath := "F:/pal/steamapps/common/PalServer/Pal/Saved"
+
+	palWorldSettingsPath, err := utils.FindPalWorldSettingsIni(directoryPath)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Printf("PalWorldSettings.ini found at: %s\n", palWorldSettingsPath)
+}

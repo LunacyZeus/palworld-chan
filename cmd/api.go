@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"palworld-chan/internal/service/api"
@@ -38,6 +39,8 @@ var apiCMD = &cobra.Command{
 
 func LaunchServerAPI(port, authUser, authPassWd string) {
 	config.Auth().Set(authUser, authPassWd) //密码设置
+	fmt.Printf("API Auth User:%s\n", authUser)
+	fmt.Printf("API Auth PassWord:%s\n", authPassWd)
 	api.Init(port)
 	return
 }

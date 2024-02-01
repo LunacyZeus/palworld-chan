@@ -128,3 +128,30 @@ func DownLoadBackUpFile(c *fiber.Ctx) error { //备份文件 下载
 	logger.Debug("下载备份文件: %s", filePath)
 	return c.Status(fiber.StatusOK).Download("D:/test/pal_20240201224637.zip")
 }
+
+func GetSaveFileList(c *fiber.Ctx) error { //存档文件列表 获取
+	serverSetting, err := dao.ServerSetting()
+	if err != nil {
+		return err
+	}
+
+	if serverSetting.SourceDir == "" {
+		err = errors.New("未设置数据目录")
+		return err
+	}
+
+	playersFolderPath, err := utils.FindPlayersFolder(serverSetting.SourceDir)
+	if err != nil {
+		err = errors.New("无玩家存档数据目录")
+		return err
+	}
+
+	// 获取目录下的全部文件名及创建日期
+	backUpFiles, err := utils.GetSaveFiles(playersFolderPath)
+	if err != nil {
+		return err
+	}
+
+	res := resp.JsonResp(backUpFiles)
+	return c.Status(fiber.StatusOK).JSON(res)
+}

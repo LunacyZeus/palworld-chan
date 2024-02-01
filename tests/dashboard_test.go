@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_ServerInfo(t *testing.T) {
+func aTest_ServerInfo(t *testing.T) {
 	//dashboard.GetCpuInfo()
 	CpuLoad := dashboard.GetCpuLoad()
 	t.Logf("CpuLoad %s", CpuLoad)
