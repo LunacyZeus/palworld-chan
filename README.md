@@ -23,14 +23,13 @@
 
 
 **使用方法  **\
-上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限\
-web ui使用办法还在写中
+下载并上传二进制文件（palworld\_chan\_amd64\_linux）到服务器并给到权限\
 
 ```bash
 chmod 755 palworld_chan_amd64_linux
 ```
 
-**启动API服务**
+**[部署教程]启动API服务**
 
 ```bash
 palworld-chan api --port=:3001 --authUser=pal --authPassWd=1234
