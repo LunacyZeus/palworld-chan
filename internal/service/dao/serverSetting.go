@@ -25,7 +25,7 @@ func ServerSetting() (updateServerSetting *models.UpdateServerSettingInput, err 
 			SourceDir:       "",
 			DestDir:         "",
 			BackupTime:      "1800",
-			BackupCount:     "2000",
+			BackupCount:     "200",
 			AccessToken:     "",
 			SecretKey:       "",
 			Bucket:          "",

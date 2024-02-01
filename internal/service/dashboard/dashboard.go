@@ -120,7 +120,7 @@ func GetProcessInfoByName(processName string) (*process.Process, error) {
 		if err != nil {
 			continue
 		}
-		//fmt.Println(name)
+		fmt.Println(name)
 
 		// 忽略大小写进行比较
 		if strings.EqualFold(name, processName) {

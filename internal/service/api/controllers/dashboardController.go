@@ -9,6 +9,7 @@ import (
 	"palworld-chan/internal/service/cron/job"
 	"palworld-chan/internal/service/dao"
 	"palworld-chan/internal/service/dashboard"
+	"palworld-chan/pkg/logger"
 	"palworld-chan/pkg/utility/utils"
 	"path/filepath"
 )
@@ -124,6 +125,6 @@ func DownLoadBackUpFile(c *fiber.Ctx) error { //备份文件 下载
 		err = errors.New("文件不存在")
 		return err
 	}
-
-	return c.Download("./files/report-12345.pdf")
+	logger.Debug("下载备份文件: %s", filePath)
+	return c.Status(fiber.StatusOK).Download("D:/test/pal_20240201224637.zip")
 }

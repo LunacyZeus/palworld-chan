@@ -1,1 +1,0 @@
-import{_ as e}from"./363ff1bb.js";import{d as o,v as t,b as a,H as r,D as s}from"./0cbe59eb.js";import"./40d76fe5.js";import"./5b0d3c54.js";import"./f299cfc0.js";const n=r(" \u4FEE\u6539\u767B\u5F55\u5BC6\u7801\u9875\u9762 "),l=o({__name:"ChangePassword",setup(u){return(_,c)=>(s(),t("div",null,[a(e),n]))}});export{l as default};
