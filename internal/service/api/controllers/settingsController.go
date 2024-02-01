@@ -40,6 +40,9 @@ func UpdateServerSetting(c *fiber.Ctx) error { //发送服务器广播
 	SourceDir := updateServerSettingInput.SourceDir
 	DestDir := updateServerSettingInput.DestDir
 
+	SourceDir = strings.TrimSuffix(SourceDir, "/")
+	DestDir = strings.TrimSuffix(DestDir, "/")
+
 	if !utils.CheckExist(SourceDir) {
 		res := models.Response{
 			Code:    300,

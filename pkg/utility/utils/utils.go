@@ -8,6 +8,7 @@ import (
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/pkg/logger"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -111,6 +112,12 @@ func GetBackUpFiles(folderPath string) ([]models.BackUpFile, error) {
 			}
 			fileList = append(fileList, elem)
 		}
+
+		// 按创建日期排序
+		sort.Slice(fileList, func(i, j int) bool {
+			return fileList[i].Created > fileList[j].Created
+		})
+
 		return nil
 	})
 
@@ -129,4 +136,9 @@ func getFileCreationDate(filePath string) (string, error) {
 	// 获取文件创建日期（修改时间）
 	creationDate := fileInfo.ModTime().Format("2006-01-02 15:04:05")
 	return creationDate, nil
+}
+
+func FileOrDirExists(path string) bool {
+	_, err := os.Stat(path)
+	return !os.IsNotExist(err)
 }

@@ -12,14 +12,14 @@ import (
 	"time"
 )
 
-var instance time.Time
-var once sync.Once
+var lastBackUpTimeInstance time.Time
+var onceBackUp sync.Once
 
 func LastBackUpTime() time.Time {
-	once.Do(func() {
-		instance = time.Now()
+	onceBackUp.Do(func() {
+		lastBackUpTimeInstance = time.Now()
 	})
-	return instance
+	return lastBackUpTimeInstance
 }
 
 func AutoBackUp() (err error) { //自动备份
@@ -62,7 +62,7 @@ func AutoBackUp() (err error) { //自动备份
 			if err != nil {
 				BackupCount = 200
 			}
-			instance = time.Now() //重置时间
+			lastBackUpTimeInstance = time.Now() //重置时间
 			logger.Debug("开始本地备份,源目录(%s),备份目录(%s),最大保留数(%d)", SourceDir, DestDir, BackupCount)
 			err = backup.LocalBackUp(SourceDir, DestDir, int(BackupCount))
 			if err != nil {

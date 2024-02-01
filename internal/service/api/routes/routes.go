@@ -59,4 +59,5 @@ func Setup(app *fiber.App) {
 	app.Get("/api/serverSetting/get", controllers.GetServerSetting)
 
 	app.Get("/api/backUpList/get", controllers.GetBackUpList)
+	app.Get("/api/backUpList/download", controllers.DownLoadBackUpFile)
 }
