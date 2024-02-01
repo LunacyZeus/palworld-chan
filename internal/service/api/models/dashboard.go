@@ -54,3 +54,8 @@ type BackUpFile struct {
 	FileName string `json:"name"`
 	Created  string `json:"created"`
 }
+
+type SaveFile struct {
+	FileName string `json:"name"`
+	Created  string `json:"created"`
+}

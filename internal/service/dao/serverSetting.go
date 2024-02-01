@@ -17,7 +17,7 @@ func ServerSetting() (updateServerSetting *models.UpdateServerSettingInput, err 
 			ProcessName:     "PalServer-Win64-Test-Cmd.exe",
 			ExecutablePath:  "F:/pal/steamapps/common/PalServer/PalServer.exe",
 			MemoryThreshold: "90",
-			CheckPeriod:     "20",
+			CheckPeriod:     "80",
 			RestartDelay:    "60",
 			RconAddress:     "",
 			RconPort:        "",
