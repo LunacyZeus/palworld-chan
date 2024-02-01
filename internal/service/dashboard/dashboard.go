@@ -9,7 +9,6 @@ import (
 	"github.com/shirou/gopsutil/mem"
 	"github.com/shirou/gopsutil/net"
 	"github.com/shirou/gopsutil/process"
-	"log"
 	"strings"
 	"time"
 )
@@ -159,7 +158,7 @@ func GetProcessInfo(processName string) (cpuUsage, memoryUsage, upTime string) {
 	if err != nil {
 		upTime = "未运行"
 	} else {
-		log.Println(createTime)
+		//log.Println(createTime)
 		upTimeNum := time.Since(time.Unix(int64(createTime/1000), 0))
 		upTime = fmt.Sprintf("%s", upTimeNum.String())
 	}
