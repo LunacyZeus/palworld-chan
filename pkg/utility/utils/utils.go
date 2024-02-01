@@ -8,6 +8,7 @@ import (
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/pkg/logger"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -111,6 +112,12 @@ func GetBackUpFiles(folderPath string) ([]models.BackUpFile, error) {
 			}
 			fileList = append(fileList, elem)
 		}
+
+		// 按创建日期排序
+		sort.Slice(fileList, func(i, j int) bool {
+			return fileList[i].Created > fileList[j].Created
+		})
+
 		return nil
 	})
 
