@@ -51,13 +51,17 @@ palworld-chan api --port=:3001 --authUser=pal --authPassWd=1234
 *   程序基于go语言开发，使用了fiber作为web部分框架，数据持久层使用的nutsdb，前端部分使用vant+vue3+pinia实现，项目脚手架使用的（<https://github.com/xiangshu233/vue3-vant4-mobile>），cron定时任务使用的（github.com/robfig/cron/v3），go部分实现代码已全部开源。
 
 **软件截图**\
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/index.png)\
-首页\
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/tool.png)\
-工具\
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/setting.png?raw=true)\
-设置\
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/backup.png?raw=true)\
-备份页\
-![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/server_setting.png?raw=true)\
-服务器设定
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/1.png?raw=true)\
+1\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/2.png?raw=true)\
+2\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/3.png?raw=true)\
+3\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/4.png?raw=true)\
+4\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/5.png?raw=true)\
+5\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/6.png?raw=true)\
+6\
+![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/7.png?raw=true)\
+7\
