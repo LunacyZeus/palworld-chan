@@ -1,6 +1,7 @@
 package routes
 
 import (
+	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"net/http"
@@ -40,10 +41,10 @@ func Setup(app *fiber.App) {
 	// Login route
 	app.Post("/api/login", controllers.Login)
 
-	// JWT Middleware
-	//app.Use(jwtware.New(jwtware.Config{
-	//	SigningKey: jwtware.SigningKey{Key: []byte("secret")},
-	//}))
+	// JWT Middlewarek
+	app.Use(jwtware.New(jwtware.Config{
+		SigningKey: jwtware.SigningKey{Key: []byte("secret")},
+	}))
 
 	app.Get("/api/getUserInfo", controllers.GetUserInfo)
 
