@@ -49,7 +49,8 @@ palworld-chan api --port=:3001 --authUser=pal --authPassWd=1234
 **程序实现以及引用开源项目**
 
 *   程序基于go语言开发，使用了fiber作为web部分框架，数据持久层使用的nutsdb，前端部分使用vant+vue3+pinia实现，项目脚手架使用的（<https://github.com/xiangshu233/vue3-vant4-mobile>），cron定时任务使用的（github.com/robfig/cron/v3），go部分实现代码已全部开源。
-
+*   配置生成代码部分借鉴于https://github.com/Bluefissure/pal-conf/
+* 
 **软件截图**\
 ![image](https://github.com/LunacyZeus/palworld-chan/blob/main/screenshots/1.png?raw=true)\
 1\
