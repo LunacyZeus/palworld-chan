@@ -10,11 +10,10 @@ import (
 var instance *nutsdb.DB
 var once sync.Once
 
-func createBucket(db *nutsdb.DB) {
-
+func createBucket(db *nutsdb.DB, bucket string) {
 	if err := db.Update(func(tx *nutsdb.Tx) error {
 		// you should call Bucket with data structure and the name of bucket first
-		return tx.NewBucket(nutsdb.DataStructureBTree, consts.BUCKET)
+		return tx.NewBucket(nutsdb.DataStructureBTree, bucket)
 	}); err != nil {
 		if err == nutsdb.ErrBucketAlreadyExist {
 			return
@@ -22,7 +21,21 @@ func createBucket(db *nutsdb.DB) {
 		logger.Fatal("bucket创建异常->%v", err)
 		return
 	}
-	logger.Info("创建本地bucket: %s", consts.BUCKET)
+	logger.Info("创建本地bucket: %s", bucket)
+}
+
+func createSortSetBucket(db *nutsdb.DB, bucket string) {
+	if err := db.Update(func(tx *nutsdb.Tx) error {
+		// you should call Bucket with data structure and the name of bucket first
+		return tx.NewSortSetBucket(bucket)
+	}); err != nil {
+		if err == nutsdb.ErrBucketAlreadyExist {
+			return
+		}
+		logger.Fatal("bucket创建异常->%v", err)
+		return
+	}
+	logger.Info("创建本地bucket: %s", bucket)
 }
 
 func Db() *nutsdb.DB {
@@ -36,8 +49,8 @@ func Db() *nutsdb.DB {
 			return
 		}
 		instance = localDb
-		createBucket(instance)
-
+		createBucket(instance, consts.BUCKET)
+		createSortSetBucket(instance, consts.USER_BUCKET)
 	})
 	return instance
 }

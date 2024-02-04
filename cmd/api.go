@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api"
 	"palworld-chan/internal/service/api/config"
 )
@@ -41,6 +42,8 @@ func LaunchServerAPI(port, authUser, authPassWd string) {
 	config.Auth().Set(authUser, authPassWd) //密码设置
 	fmt.Printf("API Auth User:%s\n", authUser)
 	fmt.Printf("API Auth PassWord:%s\n", authPassWd)
+	fmt.Printf("PalChan Version:%s\n", consts.VERSION)
+
 	api.Init(port)
 	return
 }
