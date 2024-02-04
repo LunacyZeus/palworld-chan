@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 func runUconvLatin(s string) string {
@@ -236,4 +237,12 @@ func GetSaveFiles(folderPath string) ([]models.SaveFile, error) {
 	}
 
 	return fileList, nil
+}
+
+func NowTimeStamp() float64 {
+	localTime := time.Now()
+	// 8*60*60 也可用 int((8 * time.Hour).Seconds()) 表示
+	cusZone := time.FixedZone("UTC+8", 8*60*60)
+	cusTime := localTime.In(cusZone)
+	return float64(cusTime.Unix())
 }

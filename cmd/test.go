@@ -23,8 +23,8 @@ func RunTest() {
 	log.Println("run test")
 	processName := "PalServer-Linux"
 	// 获取进程信息
-	cpuUsage, memoryUsage, upTime := dashboard.GetProcessInfo(processName)
-	log.Printf("[%s] cpuUsage %s,memoryUsage %s,upTime: %s", processName, cpuUsage, memoryUsage, upTime)
+	cpuUsage, memoryUsage, upTime, memPercent := dashboard.GetProcessInfo(processName)
+	log.Printf("[%s] cpuUsage %s,memoryUsage %s,upTime: %s,memPercent:%.2f", processName, cpuUsage, memoryUsage, upTime, memPercent)
 
 	return
 }
