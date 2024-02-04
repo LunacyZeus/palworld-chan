@@ -130,7 +130,7 @@ func GetProcessInfoByName(processName string) (*process.Process, error) {
 	return nil, fmt.Errorf("Process not found: %s", processName)
 }
 
-func GetProcessInfo(processName string) (cpuUsage, memoryUsage, upTime string) {
+func GetProcessInfo(processName string) (cpuUsage, memoryUsage, upTime string, memPercent float64) {
 	// 获取进程信息
 	proc, err := GetProcessInfoByName(processName)
 	if err != nil {
@@ -149,8 +149,12 @@ func GetProcessInfo(processName string) (cpuUsage, memoryUsage, upTime string) {
 	memoryInfo, err := proc.MemoryInfo()
 	if err != nil {
 		memoryUsage = "-"
+		memPercent = 0
 	} else {
 		memoryUsage = fmt.Sprintf("%d GB", memoryInfo.RSS/1024/1024/1024)
+
+		// 计算内存占用率
+		memPercent = float64(memoryInfo.RSS) / float64(memoryInfo.VMS) * 100
 	}
 
 	// 获取进程创建时间

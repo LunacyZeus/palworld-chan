@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"fmt"
 	"github.com/nutsdb/nutsdb"
 	"palworld-chan/pkg/utility/db"
 )
@@ -94,7 +93,7 @@ func ZMembers(bucket, key string) (members []member, err error) {
 			if nodes, err := tx.ZMembers(bucket, bKey); err != nil {
 				return err
 			} else {
-				fmt.Println("ZMembers:", nodes)
+				//fmt.Println("ZMembers:", nodes)
 
 				for node, _ := range nodes {
 					members = append(members, member{

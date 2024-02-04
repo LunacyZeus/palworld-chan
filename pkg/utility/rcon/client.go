@@ -6,6 +6,7 @@ import (
 	"log"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/pkg/logger"
+	"palworld-chan/pkg/utility/utils"
 	"strings"
 	"time"
 )
@@ -132,11 +133,13 @@ func (c *Client) ShowPlayers() ([]models.OnlinePlayer, error) {
 		name, _ := playerData["name"]
 		playeruid, _ := playerData["playeruid"]
 		steamid, _ := playerData["steamid"]
+		online := utils.NowTimeStamp()
 
 		onlinePlayer := models.OnlinePlayer{
 			Name:      name,
 			PlayerUid: playeruid,
 			SteamId:   steamid,
+			Online:    float64(online),
 		}
 
 		result = append(result, playerData)
