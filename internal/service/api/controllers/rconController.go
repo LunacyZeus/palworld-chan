@@ -111,23 +111,9 @@ func RestartServer(c *fiber.Ctx) error { //显示在线用户
 	seconds := c.Query("seconds", "30")
 	message := c.Query("message", "Server_will_reboot_in_30_s")
 
-	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
+	rconClient, err := dao.RconClient()
 	if err != nil {
 		return err
-	}
-
-	endpoint := fmt.Sprintf("%s:%s", RconAddress, RconPort)
-	password := RconPasswd
-
-	rconClient, err := rcon.New(endpoint, password)
-	if err != nil {
-		res := models.Response{
-			Code:    300,
-			Result:  nil,
-			Message: fmt.Sprintf("连接到rcon失败: %v", err),
-			Type:    "error",
-		}
-		return c.JSON(res)
 	}
 
 	result, err := rconClient.Shutdown(seconds, message)
