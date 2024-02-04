@@ -2,6 +2,7 @@ package tests
 
 import (
 	"palworld-chan/internal/consts"
+	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/dao"
 	"testing"
 	"time"
@@ -36,7 +37,7 @@ func Test_db_crud(t *testing.T) {
 
 }
 
-func Test_db_zset(t *testing.T) {
+func aTest_db_zset(t *testing.T) {
 	bucket := consts.USER_BUCKET
 	key := "test_user"
 	value := "hoho2|1234|12345"
@@ -60,4 +61,53 @@ func Test_db_zset(t *testing.T) {
 		t.Logf("key(%s) %v", key, err)
 	}
 	t.Logf("bucket(%s) key(%s) members(%v)", bucket, key, members)
+}
+
+func Test_user_zset(t *testing.T) {
+	//dao.GetUsersFromRcon()
+
+	player := models.OnlinePlayer{
+		Name:      "hoho",
+		PlayerUid: "1",
+		SteamId:   "100",
+		Online:    float64(time.Now().Unix()),
+	}
+	err := dao.AddUser(player)
+	if err != nil {
+		t.Errorf("name(%s) %v", player.Name, err)
+	}
+
+	player = models.OnlinePlayer{
+		Name:      "hoho",
+		PlayerUid: "1",
+		SteamId:   "100",
+		Online:    float64(time.Now().Unix()),
+	}
+	err = dao.AddUser(player)
+	if err != nil {
+		t.Errorf("name(%s) %v", player.Name, err)
+	}
+
+	player = models.OnlinePlayer{
+		Name:      "hoho1",
+		PlayerUid: "12",
+		SteamId:   "100",
+		Online:    float64(time.Now().Unix()),
+	}
+	err = dao.AddUser(player)
+	if err != nil {
+		t.Errorf("name(%s) %v", player.Name, err)
+	}
+
+	count, err := dao.CountUser()
+	if err != nil {
+		t.Errorf("count %v", err)
+	}
+	t.Logf("Users count: %d", count)
+
+	userList, err := dao.ListUser()
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+	t.Logf("Users: %v", userList)
 }

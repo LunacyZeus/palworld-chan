@@ -1,5 +1,6 @@
 package consts
 
 const BUCKET = "pal"
-const USER_BUCKET = "pal_user"
-const VERSION = "0.02"
+const SORT_BUCKET = "pal_sort"
+const USER_BUCKET = "pal_users"
+const VERSION = "0.03"

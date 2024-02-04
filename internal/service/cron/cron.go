@@ -19,6 +19,10 @@ func StartCron() {
 		c.AddFunc("@every 10s", func() {
 			_ = job.MonitorServer()
 		})
+		// 每60秒执行一次 获取在线玩家列表
+		c.AddFunc("@every 60s", func() {
+			_ = job.GetOnlineUser()
+		})
 		c.Start()
 	})
 }

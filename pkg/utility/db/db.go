@@ -50,7 +50,8 @@ func Db() *nutsdb.DB {
 		}
 		instance = localDb
 		createBucket(instance, consts.BUCKET)
-		createSortSetBucket(instance, consts.USER_BUCKET)
+		createBucket(instance, consts.USER_BUCKET)
+		createSortSetBucket(instance, consts.SORT_BUCKET)
 	})
 	return instance
 }
