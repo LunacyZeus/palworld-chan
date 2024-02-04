@@ -15,8 +15,39 @@ const (
 	userPrefix string = "user_"
 )
 
+func GetUser(uid string) (player models.OnlinePlayer, err error) {
+	value, err := Get(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, uid))
+	if err != nil {
+		logger.Error("从map获取json异常: %v", err)
+		return
+	}
+	err = utils.FromJSONString(value, &player)
+	if err != nil {
+		logger.Error("解析json异常: %v", err)
+		return
+	}
+	return
+}
+
 // 添加用户 使用一个有序集合加map 有序集合负责去重 map存数据
 func AddUser(player models.OnlinePlayer) (err error) {
+	oldPlayer, err := GetUser(player.PlayerUid)
+
+	if err == nil {
+		if player.PlayerUid == "<null/err>" {
+			//新的为null 存在老数据 老数据如果正常 优先使用老数据的数值
+			if oldPlayer.PlayerUid != "<null/err>" {
+				player.PlayerUid = oldPlayer.PlayerUid
+			}
+		}
+
+		if player.SteamId == "<null/err>" {
+			//新的为null 存在老数据 老数据如果正常 优先使用老数据的数值
+			if oldPlayer.SteamId != "<null/err>" {
+				player.SteamId = oldPlayer.SteamId
+			}
+		}
+	}
 	bucket := consts.SORT_BUCKET
 	value, err := utils.ToJSONString(player)
 	if err != nil {
