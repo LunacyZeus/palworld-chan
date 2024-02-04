@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"log"
-	"palworld-chan/internal/service/dashboard"
+	"palworld-chan/pkg/utility/utils/monitor"
 )
 
 func init() {
@@ -23,7 +23,7 @@ func RunTest() {
 	log.Println("run test")
 	processName := "PalServer-Linux"
 	// 获取进程信息
-	cpuUsage, memoryUsage, upTime := dashboard.GetProcessInfo(processName)
+	cpuUsage, memoryUsage, upTime := monitor.GetProcessInfo(processName)
 	log.Printf("[%s] cpuUsage %s,memoryUsage %s,upTime: %s", processName, cpuUsage, memoryUsage, upTime)
 
 	return
