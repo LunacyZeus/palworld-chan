@@ -1,5 +1,7 @@
 package models
 
+//data from https://github.com/magicbear/palworld-server-toolkit
+
 // GuildPlayer represents a player in a guild with basic information.
 type GuildPlayer struct {
 	PlayerUid string `json:"uid"`      // Unique identifier for the player
