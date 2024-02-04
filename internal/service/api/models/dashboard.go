@@ -27,9 +27,10 @@ type BroadCastInput struct {
 }
 
 type OnlinePlayer struct {
-	Name      string `json:"name"`
-	PlayerUid string `json:"playeruid"`
-	SteamId   string `json:"steamid"`
+	Name      string  `json:"name"`
+	PlayerUid string  `json:"playeruid"`
+	SteamId   string  `json:"steamid"`
+	Online    float64 `json:"online"`
 }
 
 type UpdateServerSettingInput struct {

@@ -58,27 +58,20 @@ func SendBroadCast(c *fiber.Ctx) error { //发送服务器广播
 	return c.Status(fiber.StatusOK).JSON(res)
 }
 
-func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
-	RconAddress, RconPort, RconPasswd, err := dao.RconInfo()
-	if err != nil {
-		return err
-	}
+func ShowPlayers(c *fiber.Ctx) error {
+	refresh := c.Query("refresh", "")
 
-	endpoint := fmt.Sprintf("%s:%s", RconAddress, RconPort)
-	password := RconPasswd
-
-	rconClient, err := rcon.New(endpoint, password)
-	if err != nil {
-		res := models.Response{
-			Code:    300,
-			Result:  nil,
-			Message: fmt.Sprintf("连接到rcon失败: %v", err),
-			Type:    "error",
+	if refresh == "1" {
+		//显示在线用户 通过缓存
+		_, err := dao.GetUsersFromRcon()
+		if err != nil {
+			return err
 		}
-		return c.JSON(res)
 	}
 
-	result, err := rconClient.ShowPlayers()
+	//显示在线用户 通过缓存
+	result, err := dao.ListUser()
+
 	if err != nil {
 		res := models.Response{
 			Code:    300,
@@ -96,7 +89,6 @@ func ShowPlayers(c *fiber.Ctx) error { //显示在线用户
 		Type:    "success",
 	}
 	return c.Status(fiber.StatusOK).JSON(res)
-
 }
 
 func RconInfo(c *fiber.Ctx) error { //获取游戏服务器info信息
