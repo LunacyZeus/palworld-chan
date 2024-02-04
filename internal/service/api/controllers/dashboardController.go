@@ -43,7 +43,7 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	}
 
 	// 获取进程信息
-	cpuUsage, memoryUsage, upTime := dashboard.GetProcessInfo(processName)
+	cpuUsage, memoryUsage, upTime, _ := dashboard.GetProcessInfo(processName)
 	LastBackUp := job.LastBackUpTime().Format("2006-01-02 15:04:05")
 
 	result := models.GameServerInfoStruct{

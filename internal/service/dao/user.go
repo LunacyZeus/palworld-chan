@@ -15,8 +15,8 @@ const (
 	userPrefix string = "user_"
 )
 
-func GetUser(uid string) (player models.OnlinePlayer, err error) {
-	value, err := Get(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, uid))
+func GetUser(name string) (player models.OnlinePlayer, err error) {
+	value, err := Get(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, name))
 	if err != nil {
 		logger.Error("从map获取json异常: %v", err)
 		return
@@ -31,7 +31,7 @@ func GetUser(uid string) (player models.OnlinePlayer, err error) {
 
 // 添加用户 使用一个有序集合加map 有序集合负责去重 map存数据
 func AddUser(player models.OnlinePlayer) (err error) {
-	oldPlayer, err := GetUser(player.PlayerUid)
+	oldPlayer, err := GetUser(player.Name)
 
 	if err == nil {
 		if player.PlayerUid == "<null/err>" {
@@ -55,9 +55,8 @@ func AddUser(player models.OnlinePlayer) (err error) {
 	}
 	score := player.Online
 
-	_ = Set(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, player.PlayerUid), value)
-
-	err = ZAdd(bucket, userKey, player.PlayerUid, score)
+	_ = Set(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, player.Name), value)
+	err = ZAdd(bucket, userKey, player.Name, score)
 	if err != nil {
 		return
 	}
