@@ -18,12 +18,12 @@ const (
 func GetUser(name string) (player models.OnlinePlayer, err error) {
 	value, err := Get(consts.USER_BUCKET, fmt.Sprintf("%s_%s", userPrefix, name))
 	if err != nil {
-		logger.Error("从map获取json异常: %v", err)
+		//logger.Error("从map获取json异常: %v", err)
 		return
 	}
 	err = utils.FromJSONString(value, &player)
 	if err != nil {
-		logger.Error("解析json异常: %v", err)
+		//logger.Error("解析json异常: %v", err)
 		return
 	}
 	return
