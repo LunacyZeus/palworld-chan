@@ -45,6 +45,7 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	// 获取进程信息
 	cpuUsage, memoryUsage, upTime, _ := monitor.GetProcessInfo(processName)
 	LastBackUp := tasks.LastBackUpTime().Format("2006-01-02 15:04:05")
+	onlineCount := tasks.OnlineCount() //获取在线人数
 
 	result := models.GameServerInfoStruct{
 		ProcessName:   processName,
@@ -53,6 +54,7 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 		MemoryUsage:   memoryUsage,
 		CpuUsage:      cpuUsage,
 		UpTime:        upTime,
+		OnlineCount:   onlineCount,
 		LastBackUp:    LastBackUp,
 	}
 

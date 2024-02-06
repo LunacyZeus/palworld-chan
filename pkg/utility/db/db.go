@@ -15,13 +15,13 @@ func createBucket(db *nutsdb.DB, bucket string) {
 		// you should call Bucket with data structure and the name of bucket first
 		return tx.NewBucket(nutsdb.DataStructureBTree, bucket)
 	}); err != nil {
+		logger.Info("创建本地bucket: %s", bucket)
 		if err == nutsdb.ErrBucketAlreadyExist {
 			return
 		}
 		logger.Fatal("bucket创建异常->%v", err)
 		return
 	}
-	logger.Info("创建本地bucket: %s", bucket)
 }
 
 func createSortSetBucket(db *nutsdb.DB, bucket string) {
@@ -29,13 +29,13 @@ func createSortSetBucket(db *nutsdb.DB, bucket string) {
 		// you should call Bucket with data structure and the name of bucket first
 		return tx.NewSortSetBucket(bucket)
 	}); err != nil {
+		logger.Info("创建本地bucket: %s", bucket)
 		if err == nutsdb.ErrBucketAlreadyExist {
 			return
 		}
 		logger.Fatal("bucket创建异常->%v", err)
 		return
 	}
-	logger.Info("创建本地bucket: %s", bucket)
 }
 
 func Db() *nutsdb.DB {

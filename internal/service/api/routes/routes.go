@@ -1,7 +1,6 @@
 package routes
 
 import (
-	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"net/http"
@@ -42,15 +41,17 @@ func Setup(app *fiber.App) {
 	app.Post("/api/login", controllers.Login)
 
 	// JWT Middlewarek
-	app.Use(jwtware.New(jwtware.Config{
-		SigningKey: jwtware.SigningKey{Key: []byte("secret")},
-	}))
+	//app.Use(jwtware.New(jwtware.Config{
+	//	SigningKey: jwtware.SigningKey{Key: []byte("secret")},
+	//}))
 
 	app.Get("/api/getUserInfo", controllers.GetUserInfo)
 
 	// private routes, authenticatd by middleware
 	app.Get("/api/GameServer/get", controllers.GetGameServerInfo)
 	app.Get("/api/ServerInfo/get", controllers.GetServerInfo)
+
+	app.Get("/api/logs/get", controllers.GetLogs)
 
 	app.Post("/api/BroadCast/send", controllers.SendBroadCast)
 	app.Get("/api/Players/show", controllers.ShowPlayers)

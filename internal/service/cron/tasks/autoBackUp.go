@@ -63,7 +63,7 @@ func AutoBackUp() (err error) { //自动备份
 				BackupCount = 200
 			}
 			lastBackUpTimeInstance = time.Now() //重置时间
-			logger.Debug("开始本地备份,源目录(%s),备份目录(%s),最大保留数(%d)", SourceDir, DestDir, BackupCount)
+			logger.Info("开始本地备份,源目录(%s),备份目录(%s),最大保留数(%d)", SourceDir, DestDir, BackupCount)
 			err = backup.LocalBackUp(SourceDir, DestDir, int(BackupCount))
 			if err != nil {
 				logger.Error("本地备份异常: %v", err)
