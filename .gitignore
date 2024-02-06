@@ -21,3 +21,5 @@
 # Go workspace file
 go.work
 /tests/show_player_test.go
+
+dist/
