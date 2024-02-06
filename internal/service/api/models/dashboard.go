@@ -7,6 +7,7 @@ type GameServerInfoStruct struct {
 	MemoryUsage   string `json:"memoryUsage"`
 	CpuUsage      string `json:"cpuUsage"`
 	UpTime        string `json:"upTime"`
+	OnlineCount   int    `json:"onlineCount"`
 	LastBackUp    string `json:"lastBackUp"`
 }
 
