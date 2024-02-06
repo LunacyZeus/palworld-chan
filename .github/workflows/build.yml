@@ -1,5 +1,15 @@
 name: build-go
 
+on:
+  push:
+    branches: [ "dev" ]
+    paths: # 这里是用来指定哪个文件更改，才会触发的
+    #  - 'data/version.git'
+  pull_request:
+    branches: [ "dev" ]
+    paths: # 这里是用来指定哪个文件更改，才会触发的
+    #  - 'data/version.git'
+
 jobs:
   build:
     strategy:
