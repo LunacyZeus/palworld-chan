@@ -1,0 +1,34 @@
+name: build-go
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        goos: [windows, linux, darwin]
+        goarch: [amd64, arm64]
+        include:
+          - goos: windows
+            goarch: amd64
+          - goos: linux
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.20
+      - name: Download dependencies
+        run: go mod download
+      - name: Build
+        run: go build -v -o palworld-chan .
+        # 指定编译时的环境变量
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: 0
