@@ -40,7 +40,7 @@ func MonitorServer() (err error) { //监控服务端
 	if int64(interval.Seconds()) >= CheckPeriod {
 		// 获取进程信息
 		cpuUsage, memoryUsage, upTime, memPercent := monitor.GetProcessInfo(serverSetting.ProcessName)
-		logger.Debug("每%d秒检测服务端进程占用,CPU占用(%s),内存占用(%s),内存占用率(%.2f),运行时间(%s)", CheckPeriod, cpuUsage, memoryUsage, memPercent, upTime)
+		logger.Info("每%d秒检测服务端进程占用,CPU占用(%s),内存占用(%s),内存占用率(%.2f),运行时间(%s)", CheckPeriod, cpuUsage, memoryUsage, memPercent, upTime)
 		lastMonitorTimeInstance = time.Now() //重置时间
 
 		var MemoryThreshold int64
