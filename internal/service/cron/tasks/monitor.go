@@ -56,6 +56,8 @@ func MonitorServer() (err error) { //监控服务端
 				return err
 			}
 
+			logger.Error("内存占用超过预期:%.2f>%.2f", memPercent, float64(MemoryThreshold))
+
 			message := fmt.Sprintf("Server_will_reboot_in_%s_s1", serverSetting.RestartDelay)
 
 			var result string
