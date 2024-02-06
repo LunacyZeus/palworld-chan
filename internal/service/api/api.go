@@ -1,8 +1,10 @@
 package api
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
+	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/pkg/custom"
 	"palworld-chan/internal/service/api/routes"
 	"palworld-chan/internal/service/cron"
@@ -17,7 +19,7 @@ func Init(port string) {
 		CaseSensitive: true,
 		StrictRouting: true,
 		ServerHeader:  "Fiber",
-		AppName:       "palworld-chan v0.0.1",
+		AppName:       fmt.Sprintf("palworld-chan v%s", consts.VERSION),
 		// Global custom error handler
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			return c.Status(fiber.StatusBadRequest).JSON(custom.GlobalErrorHandlerResp{
