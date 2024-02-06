@@ -6,7 +6,7 @@ import (
 	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/api/pkg/resp"
-	"palworld-chan/internal/service/cron/job"
+	"palworld-chan/internal/service/cron/tasks"
 	"palworld-chan/internal/service/dao"
 	"palworld-chan/pkg/logger"
 	"palworld-chan/pkg/utility/utils"
@@ -44,7 +44,7 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 
 	// 获取进程信息
 	cpuUsage, memoryUsage, upTime, _ := monitor.GetProcessInfo(processName)
-	LastBackUp := job.LastBackUpTime().Format("2006-01-02 15:04:05")
+	LastBackUp := tasks.LastBackUpTime().Format("2006-01-02 15:04:05")
 
 	result := models.GameServerInfoStruct{
 		ProcessName:   processName,

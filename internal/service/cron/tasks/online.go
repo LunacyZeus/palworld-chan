@@ -1,4 +1,4 @@
-package job
+package tasks
 
 import (
 	"palworld-chan/internal/service/dao"

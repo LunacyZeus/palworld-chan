@@ -1,4 +1,4 @@
-package job
+package tasks
 
 import (
 	"github.com/duke-git/lancet/v2/convertor"
