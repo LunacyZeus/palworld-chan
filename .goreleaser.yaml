@@ -23,6 +23,11 @@ builds:
       - windows
       - darwin
 
+    goarch:
+      - amd64
+      - arm64
+
+
     # GOARM to build for when GOARCH is arm.
     # For more info refer to: https://golang.org/doc/install/source#environment
     # Default is only 6.
@@ -35,13 +40,17 @@ builds:
       - goos: darwin
         goarch: amd64
       - goos: windows
-        goarch: 386
-      - goos: linux
-        goarch: 386
-        goarm: 6
-      - goos: linux
+        goarch: i386
+      - goos: windows
+        goarch: x86
+      - goos: windows
         goarch: arm
-        goarm: 7
+      - goos: linux
+        goarch: i386
+      - goos: linux
+        goarch: x86
+      - goos: linux
+        goarch: arm64
 
 archives:
   - format: tar.gz
