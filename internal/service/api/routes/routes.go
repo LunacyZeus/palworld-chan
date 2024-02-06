@@ -61,4 +61,6 @@ func Setup(app *fiber.App) {
 	app.Get("/api/saveFileList/get", controllers.GetSaveFileList)
 	app.Get("/api/backUpList/get", controllers.GetBackUpList)
 	app.Get("/api/backUpList/download", controllers.DownLoadBackUpFile)
+	app.Get("/api/player/kick", controllers.KickPlayer)
+	app.Get("/api/player/ban", controllers.BanPlayer)
 }

@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"palworld-chan/internal/service/memory"
+	"palworld-chan/pkg/utility/utils/monitor/memory"
 	"testing"
 )
 

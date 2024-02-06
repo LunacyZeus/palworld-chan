@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gorcon/rcon"
 	"log"
+	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/pkg/logger"
 	"palworld-chan/pkg/utility/utils"
@@ -40,8 +41,8 @@ type Client struct {
 // New .
 func New(Address, AdminPassword string) (*Client, error) {
 	// 设置自定义超时时间
-	dialTimeout := 10 * time.Second
-	deadline := 10 * time.Second
+	dialTimeout := consts.RCON_TIMEOUT * time.Second
+	deadline := consts.RCON_TIMEOUT * time.Second
 
 	conn, err := rcon.Dial(Address, AdminPassword, rcon.SetDialTimeout(dialTimeout), rcon.SetDeadline(deadline))
 	if err != nil {

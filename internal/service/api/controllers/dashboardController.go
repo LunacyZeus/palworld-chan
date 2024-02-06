@@ -6,11 +6,11 @@ import (
 	"palworld-chan/internal/consts"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/api/pkg/resp"
-	"palworld-chan/internal/service/cron/job"
+	"palworld-chan/internal/service/cron/tasks"
 	"palworld-chan/internal/service/dao"
-	"palworld-chan/internal/service/dashboard"
 	"palworld-chan/pkg/logger"
 	"palworld-chan/pkg/utility/utils"
+	"palworld-chan/pkg/utility/utils/monitor"
 	"path/filepath"
 )
 
@@ -43,8 +43,8 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 	}
 
 	// 获取进程信息
-	cpuUsage, memoryUsage, upTime, _ := dashboard.GetProcessInfo(processName)
-	LastBackUp := job.LastBackUpTime().Format("2006-01-02 15:04:05")
+	cpuUsage, memoryUsage, upTime, _ := monitor.GetProcessInfo(processName)
+	LastBackUp := tasks.LastBackUpTime().Format("2006-01-02 15:04:05")
 
 	result := models.GameServerInfoStruct{
 		ProcessName:   processName,
@@ -62,10 +62,10 @@ func GetGameServerInfo(c *fiber.Ctx) error { //服务器状态 获取
 
 func GetServerInfo(c *fiber.Ctx) error {
 	//游戏服务端状态 获取
-	CpuLoad := dashboard.GetCpuLoad()
-	MemPercentage := dashboard.GetMemPercentage()
-	hostName, uptime, os := dashboard.GetHostInfo()
-	isVirtualized := dashboard.IsVirtualized()
+	CpuLoad := monitor.GetCpuLoad()
+	MemPercentage := monitor.GetMemPercentage()
+	hostName, uptime, os := monitor.GetHostInfo()
+	isVirtualized := monitor.IsVirtualized()
 
 	result := models.ServerInfoStruct{
 		HostName:         hostName,
