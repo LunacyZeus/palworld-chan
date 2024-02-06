@@ -44,7 +44,13 @@ builds:
       - goos: windows
         goarch: x86
       - goos: windows
+        goarch: arm64
+      - goos: windows
         goarch: arm
+        goarm: 6
+      - goos: windows
+        goarch: arm
+        goarm: 7
       - goos: linux
         goarch: i386
       - goos: linux
