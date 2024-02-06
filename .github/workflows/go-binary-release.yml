@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [created,published] # 表示在创建新的 Release 时触发
+    types: [published,] # 表示在创建新的 Release 时触发
 
 jobs:
   # the workflow can contain other jobs, such as linting, testing, etc.
