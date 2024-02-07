@@ -28,6 +28,7 @@ func GetLogs(c *fiber.Ctx) error {
 	if len(lines) > 10000 {
 		// If more than 1000 lines, return the last 200 lines
 		lines = lines[len(lines)-9999:]
+
 	}
 
 	// Get the last modification time of the file
