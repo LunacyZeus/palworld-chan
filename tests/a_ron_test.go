@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func Test_1Rcon_Info(t *testing.T) {
+func aTest_1Rcon_Info(t *testing.T) {
 	endpoint := "pal.zixing.fun:25575"
 	password := "hoho123"
 
@@ -18,7 +18,7 @@ func Test_1Rcon_Info(t *testing.T) {
 	log.Println(rconClient.ShowPlayers())
 }
 
-func Test_2Rcon_Info(t *testing.T) {
+func aTest_2Rcon_Info(t *testing.T) {
 	endpoint := "pal.zixing.fun:25575"
 	password := "hoho123"
 
