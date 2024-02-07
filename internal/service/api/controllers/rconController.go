@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"errors"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"palworld-chan/internal/service/api/models"
 	"palworld-chan/internal/service/dao"
+	"palworld-chan/pkg/logger"
 	"strings"
 )
 
@@ -124,13 +126,25 @@ func RestartServer(c *fiber.Ctx) error { //显示在线用户
 
 func KickPlayer(c *fiber.Ctx) error { //踢出用户
 	steamId := c.Query("steamId", "")
+	playerId := c.Query("playerId", "")
+
+	kickId := steamId
+
+	if steamId == "" {
+		kickId = playerId
+	} else if playerId == "" && kickId == "" {
+		err := errors.New("参数错误")
+		return err
+	}
 
 	rconClient, err := dao.RconClient()
 	if err != nil {
 		return err
 	}
 
-	result, err := rconClient.KickPlayer(steamId)
+	logger.Info("KickPlayer steamId(%s) playerId(%s)", steamId, playerId)
+
+	result, err := rconClient.KickPlayer(kickId)
 	if err != nil {
 		res := models.Response{
 			Code:    300,
@@ -153,13 +167,25 @@ func KickPlayer(c *fiber.Ctx) error { //踢出用户
 
 func BanPlayer(c *fiber.Ctx) error { //禁用用户
 	steamId := c.Query("steamId", "")
+	playerId := c.Query("playerId", "")
+
+	banId := steamId
+
+	if steamId == "" {
+		banId = playerId
+	} else if playerId == "" && banId == "" {
+		err := errors.New("参数错误")
+		return err
+	}
 
 	rconClient, err := dao.RconClient()
 	if err != nil {
 		return err
 	}
 
-	result, err := rconClient.BanPlayer(steamId)
+	logger.Info("BanPlayer steamId(%s) playerId(%s)", steamId, playerId)
+
+	result, err := rconClient.BanPlayer(banId)
 	if err != nil {
 		res := models.Response{
 			Code:    300,
