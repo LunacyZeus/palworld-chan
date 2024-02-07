@@ -110,6 +110,7 @@ func (c *Client) ShowPlayers() ([]models.OnlinePlayer, error) {
 
 	OnlinePlayers := []models.OnlinePlayer{}
 
+	log.Println(response)
 	lines := strings.Split(response, "\n")
 	titles := strings.Split(lines[0], ",")
 	var result []map[string]string
@@ -184,6 +185,8 @@ func (c *Client) exec(cmd CmdName, args ...string) (result string, err error) {
 func (c *Client) execute(cmd CmdName) (string, error) {
 	cmdStr := string(cmd)
 	response, err := c.conn.Execute(cmdStr)
+	fmt.Printf("%v", []byte(response))
+
 	response = strings.TrimSpace(response)
 	if err != nil && c.skipErrors && response != "" {
 		return response, nil

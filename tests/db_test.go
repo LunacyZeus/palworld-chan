@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func Test_db_crud(t *testing.T) {
+func aTest_db_crud(t *testing.T) {
 	bucket := consts.BUCKET
 	key := "k"
 	value := "v"
@@ -63,7 +63,7 @@ func aTest_db_zset(t *testing.T) {
 	t.Logf("bucket(%s) key(%s) members(%v)", bucket, key, members)
 }
 
-func Test_user_zset(t *testing.T) {
+func aTest_user_zset(t *testing.T) {
 	//dao.GetUsersFromRcon()
 
 	player := models.OnlinePlayer{

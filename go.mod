@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/contrib/jwt v1.0.8
 	github.com/gofiber/fiber/v2 v2.51.0
 	github.com/golang-jwt/jwt/v5 v5.2.0
-	github.com/gorcon/rcon v1.3.4
+	github.com/gorcon/rcon v1.3.5
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/nutsdb/nutsdb v1.0.3
 	github.com/robfig/cron/v3 v3.0.1
@@ -17,6 +17,7 @@ require (
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2
 	github.com/wailsapp/wails/v2 v2.7.1
+	github.com/willroberts/minecraft-client v1.1.0
 	go.uber.org/zap v1.26.0
 )
 

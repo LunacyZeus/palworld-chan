@@ -18,7 +18,7 @@ func aTest_ServerInfo(t *testing.T) {
 
 	processName := "PalServer-Win64-Test-Cmd.exe"
 	// 获取进程信息
-	cpuUsage, memoryUsage, upTime := monitor.GetProcessInfo(processName)
+	cpuUsage, memoryUsage, upTime, _ := monitor.GetProcessInfo(processName)
 	t.Logf("[%s] cpuUsage %s,memoryUsage %s,upTime: %s", processName, cpuUsage, memoryUsage, upTime)
 
 }

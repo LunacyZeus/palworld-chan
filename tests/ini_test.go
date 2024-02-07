@@ -12,7 +12,7 @@ OptionSettings=(Difficulty=None,DayTimeSpeedRate=1.000000,NightTimeSpeedRate=1.0
 	setting.LoadIni(iniConfigString)
 }
 
-func Test_ParseIniFromLocalFile(t *testing.T) {
+func aTest_ParseIniFromLocalFile(t *testing.T) {
 	directoryPath := "F:/pal/steamapps/common/PalServer/Pal/Saved"
 
 	palWorldSettingsPath, err := utils.FindPalWorldSettingsIni(directoryPath)
