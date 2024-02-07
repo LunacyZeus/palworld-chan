@@ -68,11 +68,16 @@ func GetServerInfo(c *fiber.Ctx) error {
 	MemPercentage := monitor.GetMemPercentage()
 	hostName, uptime, os := monitor.GetHostInfo()
 	isVirtualized := monitor.IsVirtualized()
+	CpuModel, err := monitor.GetCPUModel()
+	if err != nil {
+		CpuModel = "-"
+	}
 
 	result := models.ServerInfoStruct{
 		HostName:         hostName,
 		Os:               os,
 		UpTime:           uptime,
+		CpuModel:         CpuModel,
 		CpuUsage:         CpuLoad,
 		MemoryUsage:      MemPercentage,
 		Load:             "-",

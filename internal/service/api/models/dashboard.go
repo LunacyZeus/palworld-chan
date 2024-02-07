@@ -15,6 +15,7 @@ type ServerInfoStruct struct {
 	HostName         string `json:"hostName"`
 	Os               string `json:"os"`
 	UpTime           string `json:"upTime"`
+	CpuModel         string `json:"cpuModel"`
 	CpuUsage         string `json:"cpuUsage"`
 	MemoryUsage      string `json:"memoryUsage"`
 	Load             string `json:"load"`

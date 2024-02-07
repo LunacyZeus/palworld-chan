@@ -23,4 +23,4 @@ go.work
 /tests/show_player_test.go
 /tests/a_ron_test.go
 
-dist/
+/dist/
