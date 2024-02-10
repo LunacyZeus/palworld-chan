@@ -72,6 +72,10 @@ func GetServerInfo(c *fiber.Ctx) error {
 	if err != nil {
 		CpuModel = "-"
 	}
+	Load, err := monitor.LoadUsage()
+	if err != nil {
+		Load = "-"
+	}
 
 	result := models.ServerInfoStruct{
 		HostName:         hostName,
@@ -80,7 +84,7 @@ func GetServerInfo(c *fiber.Ctx) error {
 		CpuModel:         CpuModel,
 		CpuUsage:         CpuLoad,
 		MemoryUsage:      MemPercentage,
-		Load:             "-",
+		Load:             Load,
 		DiskUsage:        "-",
 		Bandwith:         "-",
 		IsVirtualization: isVirtualized,

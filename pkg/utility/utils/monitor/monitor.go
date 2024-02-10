@@ -211,3 +211,10 @@ func GetCPUModel() (string, error) {
 
 	return "", fmt.Errorf("failed to extract CPU model information")
 }
+
+func LoadUsage() (string, error) {
+	cpuCount, _ := cpu.Counts(false)
+	loadInfo, _ := load.Avg()
+	loadUsage := loadInfo.Load1 / (float64(cpuCount*2) * 0.75) * 100
+	return fmt.Sprintf("%.2f", loadUsage), nil
+}
